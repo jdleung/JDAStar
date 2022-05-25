@@ -15,6 +15,8 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
+iOS 9.0+, Swift 4.0
+
 ## Installation
 
 JDAStar is available through [CocoaPods](https://cocoapods.org). To install
@@ -23,7 +25,40 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'JDAStar'
 ```
+## How to use
 
+```Swift
+var starTrek: JDAStarTrek?
+
+// JDAStarNode contains properties col, row, idx
+var pathNodes = [JDAStarNode]()
+```
+
+##### Initialize map size
+
+```Swift
+starTrek = JDAStarTrek(cols: 15, rows: 26)
+```
+
+##### Find path by indexes
+
+```Swift
+if let pn = starTrek?.findPath(startIndex: 0,
+                               endIndex: 72,
+                               blockIndexes: [6, 12]) {
+    pathNodes = pn
+}
+```
+
+##### Find path by positions
+
+```Swift
+if let pn = starTrek?findPath(startPosition: AStarPosition(col: 0, row: 0),
+                                endPosition: AStarPosition(col: 7, row: 12), 
+								blockPosition: []) {
+	pathNodes = pn
+}
+```
 ## License
 
 JDAStar is available under the MIT license. See the LICENSE file for more info.
