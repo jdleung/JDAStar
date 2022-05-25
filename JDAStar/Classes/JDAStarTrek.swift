@@ -95,16 +95,18 @@ public class JDAStarTrek: NSObject {
             closeNodes.append(currNode)
         }
         
-        var nd = mapNodes[endIndex]
-        if nd.parent == nil { return nil }
+        var node = mapNodes[endIndex]
+        if node.parent == nil { return nil }
         
-        var pathNodes: [JDAStarNode] = [nd]
-        repeat {
-            nd = nd.parent!
-            pathNodes.append(nd)
-        } while nd != startNode
-        
-        return pathNodes
+        var pathNodes = [JDAStarNode]()
+        while node != startNode {
+            pathNodes.append(node)
+            guard let pn = node.parent else {
+                return nil
+            }
+            node = pn
+        }
+        return pathNodes.reversed()
     }
     
     private func getPositionByIndex(_ index: Int) -> (col: Int, row: Int) {
