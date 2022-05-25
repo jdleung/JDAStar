@@ -7,6 +7,8 @@
 
 A simple path finding library based on the A* algorithm.
 
+<img src="screenshot.gif" width="300" />
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
