@@ -14,7 +14,7 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		64C01CF7A66CFF24F081D316 /* Pods_JDAStar_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A3F219F45AF2D54DC1471BF /* Pods_JDAStar_Example.framework */; };
-		A661AEB950C2D893898AB1D4 /* Pods_JDAStar_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E97CD60BD4834386A55C15BC /* Pods_JDAStar_Tests.framework */; };
+		7DBF94BBD52EB8CEE28D57C4 /* Pods_JDAStar_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA62212FAFBA61D7EF495735 /* Pods_JDAStar_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,8 +29,8 @@
 
 /* Begin PBXFileReference section */
 		18EC2D2D48B65E7A9EFD4BAD /* Pods-JDAStar_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDAStar_Example.release.xcconfig"; path = "Target Support Files/Pods-JDAStar_Example/Pods-JDAStar_Example.release.xcconfig"; sourceTree = "<group>"; };
-		24794876E8829A18CF8B8950 /* JDAStar.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = JDAStar.podspec; path = ../JDAStar.podspec; sourceTree = "<group>"; };
-		3750A91B953EA608D5ED0130 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		24794876E8829A18CF8B8950 /* JDAStar.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = JDAStar.podspec; path = ../JDAStar.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		3750A91B953EA608D5ED0130 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		5A3F219F45AF2D54DC1471BF /* Pods_JDAStar_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JDAStar_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD01AFB9204008FA782 /* JDAStar_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JDAStar_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACD41AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,11 +42,11 @@
 		607FACE51AFB9204008FA782 /* JDAStar_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JDAStar_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		6346C76195C1D97897A5DECA /* Pods-JDAStar_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDAStar_Tests.debug.xcconfig"; path = "Target Support Files/Pods-JDAStar_Tests/Pods-JDAStar_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		7525A83C26F2B6D880D09FE4 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		66B448372EA7B9D628369742 /* Pods-JDAStar_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDAStar_Tests.debug.xcconfig"; path = "Target Support Files/Pods-JDAStar_Tests/Pods-JDAStar_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		7525A83C26F2B6D880D09FE4 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		B1F570A62802DEB5750E4B9D /* Pods-JDAStar_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDAStar_Tests.release.xcconfig"; path = "Target Support Files/Pods-JDAStar_Tests/Pods-JDAStar_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		BDCB1AA9BDA20C712252A6DC /* Pods-JDAStar_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDAStar_Example.debug.xcconfig"; path = "Target Support Files/Pods-JDAStar_Example/Pods-JDAStar_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		E0F03A6FBB87EA37DAD38429 /* Pods-JDAStar_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JDAStar_Tests.release.xcconfig"; path = "Target Support Files/Pods-JDAStar_Tests/Pods-JDAStar_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		E97CD60BD4834386A55C15BC /* Pods_JDAStar_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JDAStar_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA62212FAFBA61D7EF495735 /* Pods_JDAStar_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JDAStar_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,7 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A661AEB950C2D893898AB1D4 /* Pods_JDAStar_Tests.framework in Frameworks */,
+				7DBF94BBD52EB8CEE28D57C4 /* Pods_JDAStar_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,10 +74,9 @@
 			children = (
 				BDCB1AA9BDA20C712252A6DC /* Pods-JDAStar_Example.debug.xcconfig */,
 				18EC2D2D48B65E7A9EFD4BAD /* Pods-JDAStar_Example.release.xcconfig */,
-				6346C76195C1D97897A5DECA /* Pods-JDAStar_Tests.debug.xcconfig */,
-				E0F03A6FBB87EA37DAD38429 /* Pods-JDAStar_Tests.release.xcconfig */,
+				66B448372EA7B9D628369742 /* Pods-JDAStar_Tests.debug.xcconfig */,
+				B1F570A62802DEB5750E4B9D /* Pods-JDAStar_Tests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -155,7 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				5A3F219F45AF2D54DC1471BF /* Pods_JDAStar_Example.framework */,
-				E97CD60BD4834386A55C15BC /* Pods_JDAStar_Tests.framework */,
+				FA62212FAFBA61D7EF495735 /* Pods_JDAStar_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -171,7 +170,7 @@
 				607FACCC1AFB9204008FA782 /* Sources */,
 				607FACCD1AFB9204008FA782 /* Frameworks */,
 				607FACCE1AFB9204008FA782 /* Resources */,
-				C0FA50F6BD8F0A40878CC34A /* [CP] Embed Pods Frameworks */,
+				177FD1647AF4E0F5A1E963EE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -186,7 +185,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 607FACF21AFB9204008FA782 /* Build configuration list for PBXNativeTarget "JDAStar_Tests" */;
 			buildPhases = (
-				75F925B8894C9DA3C4C10F92 /* [CP] Check Pods Manifest.lock */,
+				513CE1A436C7938F0593A162 /* [CP] Check Pods Manifest.lock */,
 				607FACE11AFB9204008FA782 /* Sources */,
 				607FACE21AFB9204008FA782 /* Frameworks */,
 				607FACE31AFB9204008FA782 /* Resources */,
@@ -227,6 +226,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -262,7 +262,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		75F925B8894C9DA3C4C10F92 /* [CP] Check Pods Manifest.lock */ = {
+		177FD1647AF4E0F5A1E963EE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-JDAStar_Example/Pods-JDAStar_Example-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/JDAStar/JDAStar.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JDAStar.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JDAStar_Example/Pods-JDAStar_Example-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		513CE1A436C7938F0593A162 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -282,24 +300,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C0FA50F6BD8F0A40878CC34A /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-JDAStar_Example/Pods-JDAStar_Example-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/JDAStar/JDAStar.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JDAStar.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-JDAStar_Example/Pods-JDAStar_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F681CC9456E058683B399AB1 /* [CP] Check Pods Manifest.lock */ = {
@@ -505,7 +505,7 @@
 		};
 		607FACF31AFB9204008FA782 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6346C76195C1D97897A5DECA /* Pods-JDAStar_Tests.debug.xcconfig */;
+			baseConfigurationReference = 66B448372EA7B9D628369742 /* Pods-JDAStar_Tests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
@@ -527,7 +527,7 @@
 		};
 		607FACF41AFB9204008FA782 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E0F03A6FBB87EA37DAD38429 /* Pods-JDAStar_Tests.release.xcconfig */;
+			baseConfigurationReference = B1F570A62802DEB5750E4B9D /* Pods-JDAStar_Tests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",

@@ -5,6 +5,8 @@
 [![License](https://img.shields.io/cocoapods/l/JDAStar.svg?style=flat)](https://cocoapods.org/pods/JDAStar)
 [![Platform](https://img.shields.io/cocoapods/p/JDAStar.svg?style=flat)](https://cocoapods.org/pods/JDAStar)
 
+A simple path finding library based on the A* algorithm.
+
 ## Example
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
@@ -19,10 +21,6 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'JDAStar'
 ```
-
-## Author
-
-jdleung, jdleungs@gmail.com
 
 ## License
 

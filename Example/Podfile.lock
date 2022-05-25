@@ -1,0 +1,16 @@
+PODS:
+  - JDAStar (0.1.0)
+
+DEPENDENCIES:
+  - JDAStar (from `../`)
+
+EXTERNAL SOURCES:
+  JDAStar:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  JDAStar: 640a7a527bfb79e3bf147851faf2b72833a9615f
+
+PODFILE CHECKSUM: 1c7f9db8b03fa24ba4c1f442d0d4d329c4d0521d
+
+COCOAPODS: 1.11.3

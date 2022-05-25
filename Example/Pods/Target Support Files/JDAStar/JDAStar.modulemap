@@ -1,0 +1,6 @@
+framework module JDAStar {
+  umbrella header "JDAStar-umbrella.h"
+
+  export *
+  module * { export * }
+}
