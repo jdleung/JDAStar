@@ -58,11 +58,11 @@ public class JDAStarTrek: NSObject {
      - parameter blockPositions:  The positions that are blocked or to be skipped
      - Returns: An array of `JDAStarNode`.
      */
-    public func findPath(startPosition: AStarPosition, endPosition: AStarPosition, blockPositions: [AStarPosition]) -> [JDAStarNode]? {
+    public func findPath(startPosition: AStarPosition, endPosition: AStarPosition, blockedPositions: [AStarPosition]) -> [JDAStarNode]? {
         let startIndex = getIndexByPosition(col: startPosition.col, row: startPosition.row)
         let endIndex = getIndexByPosition(col: endPosition.col, row: endPosition.row)
-        let blockIndexes = blockPositions.map{ getIndexByPosition(col: $0.col, row: $0.row )}
-        return findPath(startIndex: startIndex, endIndex: endIndex, blockIndexes: blockIndexes)
+        let blockedIndexes = blockedPositions.map{ getIndexByPosition(col: $0.col, row: $0.row )}
+        return findPath(startIndex: startIndex, endIndex: endIndex, blockedIndexes: blockedIndexes)
     }
     
     /**
@@ -73,14 +73,14 @@ public class JDAStarTrek: NSObject {
      - parameter blockIndexes:  The indexes that are blocked or to be skipped
      - Returns: An array of `JDAStarNode`.
      */
-    public func findPath(startIndex: Int, endIndex: Int, blockIndexes: [Int]) -> [JDAStarNode]? {
+    public func findPath(startIndex: Int, endIndex: Int, blockedIndexes: [Int]) -> [JDAStarNode]? {
 
         if isInvalidIndexes(startIndex, endIndex) {
             return nil
         }
         
         let (endCol, endRow) = getPositionByIndex(endIndex)
-        let mapNodes = createNodes(blockIndexes)
+        let mapNodes = createNodes(blockedIndexes)
         let startNode = mapNodes[startIndex]
         var closeNodes: [JDAStarNode] = []
         var openNodes: [JDAStarNode] = [startNode]

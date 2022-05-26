@@ -20,7 +20,7 @@ class ViewController: UIViewController {
     var gridCollectionView: UICollectionView!
     var tapModeSegmentControl: UISegmentedControl!
     var pathModeSegmentControl: UISegmentedControl!
-    var blockIndexes = [97, 112, 126, 141, 155, 170, 184, 199, 128, 143, 159, 174, 190, 205]
+    var blockedIndexes = [97, 112, 126, 141, 155, 170, 184, 199, 128, 143, 159, 174, 190, 205]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,18 +68,18 @@ extension ViewController {
         if tapModeSegmentControl.selectedSegmentIndex == 1 {
             setBlock(idx)
         }
-        else if idx != startIndex && blockIndexes.firstIndex(of: idx) == nil {
+        else if idx != startIndex && blockedIndexes.firstIndex(of: idx) == nil {
             targetIndex = idx
         }
         findPathTo(targetIndex)
     }
     
     private func setBlock(_ idx: Int) {
-        if let i = blockIndexes.firstIndex(of: idx) {
-            blockIndexes.remove(at: i)
+        if let i = blockedIndexes.firstIndex(of: idx) {
+            blockedIndexes.remove(at: i)
         }
         else {
-            blockIndexes.append(idx)
+            blockedIndexes.append(idx)
         }
     }
     
@@ -93,7 +93,7 @@ extension ViewController {
         pathIndexes.removeAll()
         if let pn = starTrek?.findPath(startIndex: startIndex,
                                     endIndex: idx,
-                                    blockIndexes: blockIndexes) {
+                                    blockedIndexes: blockedIndexes) {
             pathIndexes = pn.map{ $0.idx }
         }
         gridCollectionView.reloadData()
@@ -114,7 +114,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
         else if indexPath.row == targetIndex {
             cell.backgroundColor = #colorLiteral(red: 1, green: 0.2156862745, blue: 0.3725490196, alpha: 1)
         }
-        else if blockIndexes.contains(indexPath.row) {
+        else if blockedIndexes.contains(indexPath.row) {
             cell.backgroundColor = #colorLiteral(red: 0.3179988265, green: 0.3179988265, blue: 0.3179988265, alpha: 1)
         }
         else if pathIndexes.contains(indexPath.row) {
