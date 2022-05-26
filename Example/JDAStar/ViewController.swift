@@ -13,24 +13,26 @@ class ViewController: UIViewController {
         
     let cols = 15
     let rows = 20
+    let startIndex = 0
     var targetIndex = 127
     var pathIndexes = [Int]()
     var starTrek: JDAStarTrek?
     var gridCollectionView: UICollectionView!
-    var modeSegmentControl: UISegmentedControl!
+    var tapModeSegmentControl: UISegmentedControl!
+    var pathModeSegmentControl: UISegmentedControl!
     var blockIndexes = [97, 112, 126, 141, 155, 170, 184, 199, 128, 143, 159, 174, 190, 205]
     
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        setUpCollectionView()
+        setupCollectionView()
         setupSegmentControl()
         
         starTrek = JDAStarTrek(cols: cols, rows: rows)
         findPathTo(targetIndex)
     }
     
-    private func setUpCollectionView() {
+    private func setupCollectionView() {
         let w = UIScreen.main.bounds.width - 16
         let layout = UICollectionViewFlowLayout()
         let cellSize = (w-16) / CGFloat(cols)
@@ -40,7 +42,7 @@ class ViewController: UIViewController {
         let h = cellSize * CGFloat(rows) + CGFloat(rows)
         
         gridCollectionView = UICollectionView(frame: CGRect(x: 8, y: 0, width: w, height: h), collectionViewLayout: layout)
-        gridCollectionView.center.y = self.view.center.y
+        gridCollectionView.center.y = self.view.center.y + 30
         gridCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         gridCollectionView.delegate = self
         gridCollectionView.dataSource = self
@@ -48,20 +50,25 @@ class ViewController: UIViewController {
     }
     
     private func setupSegmentControl() {
-        modeSegmentControl = UISegmentedControl(items: ["Target", "Block"])
-        modeSegmentControl.frame = CGRect(x: 0, y: gridCollectionView.frame.origin.y - 50, width: 120, height: 36)
-        modeSegmentControl.selectedSegmentIndex = 0
-        modeSegmentControl.center.x = self.view.center.x
-        self.view.addSubview(modeSegmentControl)
+        tapModeSegmentControl = UISegmentedControl(items: ["Target", "Block"])
+        tapModeSegmentControl.frame = CGRect(x: self.view.center.x - 170, y: gridCollectionView.frame.origin.y - 70, width: 150, height: 36)
+        tapModeSegmentControl.selectedSegmentIndex = 0
+        self.view.addSubview(tapModeSegmentControl)
+        
+        pathModeSegmentControl = UISegmentedControl(items: ["Staight", "Diagonal"])
+        pathModeSegmentControl.frame = CGRect(x: self.view.center.x + 20, y: tapModeSegmentControl.frame.origin.y, width: 150, height: 36)
+        pathModeSegmentControl.selectedSegmentIndex = 0
+        pathModeSegmentControl.addTarget(self, action: #selector(pathModeSegmentControlChanged(_:)), for: .valueChanged)
+        self.view.addSubview(pathModeSegmentControl)
     }   
 }
 
 extension ViewController {
     private func didSelectCell(_ idx: Int) {
-        if modeSegmentControl.selectedSegmentIndex == 1 {
+        if tapModeSegmentControl.selectedSegmentIndex == 1 {
             setBlock(idx)
         }
-        else if idx > 0 && blockIndexes.firstIndex(of: idx) == nil {
+        else if idx != startIndex && blockIndexes.firstIndex(of: idx) == nil {
             targetIndex = idx
         }
         findPathTo(targetIndex)
@@ -76,9 +83,15 @@ extension ViewController {
         }
     }
     
+    @objc
+    private func pathModeSegmentControlChanged(_ sender: UISegmentedControl) {
+        starTrek?.isDiagonalEnable = sender.selectedSegmentIndex == 1
+        findPathTo(targetIndex)
+    }
+    
     private func findPathTo(_ idx: Int) {
         pathIndexes.removeAll()
-        if let pn = starTrek?.findPath(startIndex: 0,
+        if let pn = starTrek?.findPath(startIndex: startIndex,
                                     endIndex: idx,
                                     blockIndexes: blockIndexes) {
             pathIndexes = pn.map{ $0.idx }
@@ -95,7 +108,7 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
         
-        if indexPath.row == 0 {
+        if indexPath.row == startIndex {
             cell.backgroundColor = #colorLiteral(red: 0.2174892128, green: 0.8184008598, blue: 0, alpha: 1)
         }
         else if indexPath.row == targetIndex {

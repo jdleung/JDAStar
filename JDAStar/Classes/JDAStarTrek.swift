@@ -22,13 +22,15 @@ public class JDAStarTrek: NSObject {
     
     var cols: Int
     var rows: Int
+    public var isDiagonalEnable = false
     
-    public init(cols: Int, rows: Int) {
+    public init(cols: Int, rows: Int, isDiagonalEnable: Bool = false) {
         self.cols = cols
         self.rows = rows
+        self.isDiagonalEnable = isDiagonalEnable
     }
     
-    func setSize(cols: Int, rows: Int) {
+    public func setSize(cols: Int, rows: Int) {
         self.cols = cols
         self.rows = rows
     }
@@ -48,44 +50,34 @@ public class JDAStarTrek: NSObject {
         
         let (endCol, endRow) = getPositionByIndex(endIndex)
         let mapNodes = createNodes(blockIndexes)
-        var openNodes = [JDAStarNode]()
-        var closeNodes = [JDAStarNode]()
         let startNode = mapNodes[startIndex]
-        openNodes.append(startNode)
+        var closeNodes: [JDAStarNode] = []
+        var openNodes: [JDAStarNode] = [startNode]
         
         while openNodes.count > 0 {
-            /// Sort nodes in ascending order of  f value
+            /// Sort nodes in ascending order of f value
             openNodes.sort { $0.f < $1.f }
             let currNode = openNodes.first!
             if currNode.idx == endIndex {
                 break
             }
-            
-            /// right, left, down, up
-            let neighbours = [1, -1, cols, -cols]
-            for nb in neighbours {
-                let cp = getPositionByIndex(currNode.idx)
-                let op = getPositionByIndex(nb)
-                let newCol = cp.col + op.col
-                let newRow = cp.row + op.row
-                
-                if isInvalidPosition(col: newCol, row: newRow) {
-                    continue
-                }
-                
-                let subIndex = currNode.idx + nb
+
+            for nb in getNeigbourPositions(of: currNode) {
+                let subIndex = getIndexByPosition(col: nb.col, row: nb.row)
                 let subNode = mapNodes[subIndex]
                 
-                /// Skip blocked or searched node
                 if subNode.isBlocked || closeNodes.contains(subNode) { continue }
 
                 /// Set costs
                 if subNode != startNode {
-                    subNode.g = currNode.g + 1
-                    subNode.h = abs(subNode.row - endRow) + abs(subNode.col - endCol)
+                    subNode.g = currNode.g + 10
+                    if isDiagonalEnable && isCornerPosition(subNode, currNode) {
+                        subNode.g = currNode.g + 14
+                    }
+                    subNode.h = (abs(subNode.row - endRow) + abs(subNode.col - endCol)) * 10
                     subNode.f = subNode.g + subNode.h
                 }
-                /// Add node to waiting for search
+                
                 if !openNodes.contains(subNode) {
                     subNode.parent = currNode
                     openNodes.append(subNode)
@@ -93,8 +85,8 @@ public class JDAStarTrek: NSObject {
             }
             openNodes.removeFirst()
             closeNodes.append(currNode)
-        }
-        
+        }        
+
         var node = mapNodes[endIndex]
         if node.parent == nil { return nil }
         
@@ -145,4 +137,35 @@ public class JDAStarTrek: NSObject {
         return nodes
     }
     
+    private func getNeigbourPositions(of currNode: JDAStarNode) -> [AStarPosition] {
+        /// right, left, down, up
+        var offsets = [AStarPosition(col: 1, row: 0),
+                       AStarPosition(col: 0, row: 1),
+                       AStarPosition(col: 0, row: -1),
+                       AStarPosition(col: -1, row: 0)]
+        
+        /// top left, top right, bottom left, bottom right
+        if isDiagonalEnable {
+            let corners = [AStarPosition(col: -1, row: -1),
+                           AStarPosition(col: 1, row: -1),
+                           AStarPosition(col: -1, row: 1),
+                           AStarPosition(col: 1, row: 1)]
+            offsets += corners
+        }
+        
+        var positions = [AStarPosition]()
+        for os in offsets {
+            let newCol = currNode.col + os.col
+            let newRow = currNode.row + os.row
+            if isInvalidPosition(col: newCol, row: newRow) {
+                continue
+            }
+            positions.append(AStarPosition(col: newCol, row: newRow))
+        }
+        return positions
+    }
+    
+    private func isCornerPosition( _ subNode: JDAStarNode, _ currNode: JDAStarNode) -> Bool {
+        return abs(subNode.col - currNode.col) == 1 && abs(subNode.row - currNode.row) == 1
+    }
 }
