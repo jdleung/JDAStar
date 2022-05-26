@@ -22,19 +22,42 @@ public class JDAStarTrek: NSObject {
     
     var cols: Int
     var rows: Int
+    
+    /// Whether to allow finding diagonal path.
     public var isDiagonalEnabled = false
     
+    /**
+     Initialize
+     
+     - parameter cols:               The number of horizonal cells in the map.
+     - parameter rows:               The number of vertical cells in the map.
+     - parameter isDiagonalEnabled:  Whether to allow finding diagonal path.
+     */
     public init(cols: Int, rows: Int, isDiagonalEnabled: Bool = false) {
         self.cols = cols
         self.rows = rows
         self.isDiagonalEnabled = isDiagonalEnabled
     }
     
+    /**
+     Set the size of map
+     
+     - parameter cols: The number of horizonal cells in the map.
+     - parameter rows: The number of vertical cells in the map.
+     */
     public func setMapSize(cols: Int, rows: Int) {
         self.cols = cols
         self.rows = rows
     }
-
+    
+    /**
+     Get the path nodes by specified positions
+     
+     - parameter startPosition:   The start position in the map.
+     - parameter endPosition:     The end position in the map.
+     - parameter blockPositions:  The positions that are blocked or to be skipped
+     - Returns: An array of `JDAStarNode`.
+     */
     public func findPath(startPosition: AStarPosition, endPosition: AStarPosition, blockPositions: [AStarPosition]) -> [JDAStarNode]? {
         let startIndex = getIndexByPosition(col: startPosition.col, row: startPosition.row)
         let endIndex = getIndexByPosition(col: endPosition.col, row: endPosition.row)
@@ -42,6 +65,14 @@ public class JDAStarTrek: NSObject {
         return findPath(startIndex: startIndex, endIndex: endIndex, blockIndexes: blockIndexes)
     }
     
+    /**
+     Get the path nodes by specified indexes
+     
+     - parameter startIndex:    The start index in the map array.
+     - parameter endIndex:      The end index in the map array.
+     - parameter blockIndexes:  The indexes that are blocked or to be skipped
+     - Returns: An array of `JDAStarNode`.
+     */
     public func findPath(startIndex: Int, endIndex: Int, blockIndexes: [Int]) -> [JDAStarNode]? {
 
         if isInvalidIndexes(startIndex, endIndex) {
