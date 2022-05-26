@@ -85,7 +85,7 @@ extension ViewController {
     
     @objc
     private func pathModeSegmentControlChanged(_ sender: UISegmentedControl) {
-        starTrek?.isDiagonalEnable = sender.selectedSegmentIndex == 1
+        starTrek?.isDiagonalEnabled = sender.selectedSegmentIndex == 1
         findPathTo(targetIndex)
     }
     

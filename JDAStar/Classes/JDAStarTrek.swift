@@ -22,12 +22,12 @@ public class JDAStarTrek: NSObject {
     
     var cols: Int
     var rows: Int
-    public var isDiagonalEnable = false
+    public var isDiagonalEnabled = false
     
-    public init(cols: Int, rows: Int, isDiagonalEnable: Bool = false) {
+    public init(cols: Int, rows: Int, isDiagonalEnabled: Bool = false) {
         self.cols = cols
         self.rows = rows
-        self.isDiagonalEnable = isDiagonalEnable
+        self.isDiagonalEnabled = isDiagonalEnabled
     }
     
     public func setSize(cols: Int, rows: Int) {
@@ -71,7 +71,7 @@ public class JDAStarTrek: NSObject {
                 /// Set costs
                 if subNode != startNode {
                     subNode.g = currNode.g + 10
-                    if isDiagonalEnable && isCornerPosition(subNode, currNode) {
+                    if isDiagonalEnabled && isCornerPosition(subNode, currNode) {
                         subNode.g = currNode.g + 14
                     }
                     subNode.h = (abs(subNode.row - endRow) + abs(subNode.col - endCol)) * 10
@@ -145,7 +145,7 @@ public class JDAStarTrek: NSObject {
                        AStarPosition(col: -1, row: 0)]
         
         /// top left, top right, bottom left, bottom right
-        if isDiagonalEnable {
+        if isDiagonalEnabled {
             let corners = [AStarPosition(col: -1, row: -1),
                            AStarPosition(col: 1, row: -1),
                            AStarPosition(col: -1, row: 1),
