@@ -25,22 +25,23 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod 'JDAStar'
 ```
-## How to use
+## Usage
 
 ```Swift
 var starTrek: JDAStarTrek?
 
 // JDAStarNode contains properties col, row, idx
 var pathNodes = [JDAStarNode]()
+
+// Initialize map size and path mode
+starTrek = JDAStarTrek(cols: 15, rows: 26, isDiagonalEnable: false)
+
+// Dianymically set size and path mode
+starTrek?.setMapSize(cols: 23, rows: 40)
+starTrek?.isDiagonalEnabled = true
 ```
 
-##### Initialize map size
-
-```Swift
-starTrek = JDAStarTrek(cols: 15, rows: 26)
-```
-
-##### Find path by indexes
+Find path by indexes
 
 ```Swift
 if let pn = starTrek?.findPath(startIndex: 0,
@@ -50,7 +51,7 @@ if let pn = starTrek?.findPath(startIndex: 0,
 }
 ```
 
-##### Find path by positions
+Find path by positions
 
 ```Swift
 if let pn = starTrek?findPath(startPosition: AStarPosition(col: 0, row: 0),
