@@ -30,7 +30,7 @@ public class JDAStarTrek: NSObject {
         self.isDiagonalEnabled = isDiagonalEnabled
     }
     
-    public func setSize(cols: Int, rows: Int) {
+    public func setMapSize(cols: Int, rows: Int) {
         self.cols = cols
         self.rows = rows
     }
