@@ -15,6 +15,7 @@ class ViewController: UIViewController {
     let rows = 20
     let startIndex = 0
     var targetIndex = 127
+    let isShowIndex = false
     var pathIndexes = [Int]()
     var starTrek: JDAStarTrek?
     var gridCollectionView: UICollectionView!
@@ -121,8 +122,22 @@ extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
             cell.backgroundColor = #colorLiteral(red: 0.4620369673, green: 0.8382686973, blue: 1, alpha: 1)
         }
         else {
-            cell.backgroundColor = #colorLiteral(red: 0.8440209031, green: 0.8440209031, blue: 0.8440209031, alpha: 1)
+            cell.backgroundColor = #colorLiteral(red: 0.8675442338, green: 0.8675442338, blue: 0.8675442338, alpha: 1)
         }
+        
+        if isShowIndex {
+            for sv in cell.contentView.subviews {
+                sv.removeFromSuperview()
+            }
+            let numLabel = UILabel(frame: CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height))
+            numLabel.textAlignment = .center
+            numLabel.adjustsFontSizeToFitWidth = true
+            numLabel.text = String(indexPath.row)
+            numLabel.font = UIFont.systemFont(ofSize: 10)
+            numLabel.textColor = .darkGray
+            cell.contentView.addSubview(numLabel)
+        }
+        
         return cell
     }
     

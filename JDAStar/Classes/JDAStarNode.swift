@@ -11,14 +11,13 @@ import Foundation
 public class JDAStarNode: NSObject {
     
     /// Cost of the transversal: g + h
-    public var f: Int = 0
+    public var f: Double = 0.0
     
     /// The actual cost of transversal from the starting node to the current node
-    /// straight line = 10，diagonal = 45° = sqrt(10^2+10^2) ≈ 14 （20 can solve some mistake move)
-    public var g: Int = 0
+    public var g: Double = 0.0
     
     /// The estimate cost of transversal from the current node to the target node
-    public var h: Int = 0
+    public var h: Double = 0.0
     
     /// Parenent node
     public var parent: JDAStarNode?

@@ -74,7 +74,6 @@ public class JDAStarTrek: NSObject {
      - Returns: An array of `JDAStarNode`.
      */
     public func findPath(startIndex: Int, endIndex: Int, blockedIndexes: [Int]) -> [JDAStarNode]? {
-
         if isInvalidIndexes(startIndex, endIndex) {
             return nil
         }
@@ -99,14 +98,14 @@ public class JDAStarTrek: NSObject {
                 
                 if subNode.isBlocked || closeNodes.contains(subNode) { continue }
 
-                /// Set costs
                 if subNode != startNode {
-                    subNode.g = currNode.g + 10
-                    if isDiagonalEnabled && isCornerPosition(subNode, currNode) {
-                        subNode.g = currNode.g + 20
-                    }
-                    subNode.h = (abs(subNode.row - endRow) + abs(subNode.col - endCol)) * 10
-                    subNode.f = subNode.g + subNode.h
+                    let cost = calculateCosts(currNode: currNode,
+                                               subNode: subNode,
+                                               endCol: endCol,
+                                               endRow: endRow)
+                    subNode.g = cost.g
+                    subNode.h = cost.h
+                    subNode.f = cost.f
                 }
                 
                 if !openNodes.contains(subNode) {
@@ -129,6 +128,7 @@ public class JDAStarTrek: NSObject {
             }
             node = pn
         }
+
         return pathNodes.reversed()
     }
     
@@ -194,6 +194,33 @@ public class JDAStarTrek: NSObject {
             positions.append(AStarPosition(col: newCol, row: newRow))
         }
         return positions
+    }
+    
+    private func calculateCosts(currNode: JDAStarNode, subNode: JDAStarNode, endCol: Int, endRow: Int) -> (g: Double, h: Double, f: Double) {
+        let dx = Double(abs(subNode.col - endCol))
+        let dy = Double(abs(subNode.row - endRow))
+        let dv = 10.0
+        let g = currNode.g + dv
+        var h = 0.0
+        
+        if isDiagonalEnabled {
+            /// Diagonal Distance:
+            /// When we are allowed to move in eight directions only
+            let dv2 = sqrt(2) * dv
+            h = dv * (dx + dy) + (dv2 - 2 * dv) * min(dx, dy)
+            
+            /// Euclidean Distance
+            /// When we are allowed to move in any directions
+            /// h = sqrt(dx * dx + dy * dy) * dv
+        } else {
+            /// Manhattan Distance
+            /// When we are allowed to move only in four directions only (left, right, up, down)
+            h = (dx + dy) * dv
+        }
+        
+        let f = g + h
+        
+        return (g, h, f)
     }
     
     private func isCornerPosition( _ subNode: JDAStarNode, _ currNode: JDAStarNode) -> Bool {
