@@ -7,7 +7,7 @@
 
 A simple path finding library based on the A* algorithm.
 
-<img src="screenshot.gif" width="300" />
+<img src="screenshot.gif" />
 
 ## Example
 
