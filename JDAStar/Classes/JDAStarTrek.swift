@@ -103,7 +103,7 @@ public class JDAStarTrek: NSObject {
                 if subNode != startNode {
                     subNode.g = currNode.g + 10
                     if isDiagonalEnabled && isCornerPosition(subNode, currNode) {
-                        subNode.g = currNode.g + 14
+                        subNode.g = currNode.g + 20
                     }
                     subNode.h = (abs(subNode.row - endRow) + abs(subNode.col - endCol)) * 10
                     subNode.f = subNode.g + subNode.h
@@ -116,7 +116,7 @@ public class JDAStarTrek: NSObject {
             }
             openNodes.removeFirst()
             closeNodes.append(currNode)
-        }        
+        }
 
         var node = mapNodes[endIndex]
         if node.parent == nil { return nil }

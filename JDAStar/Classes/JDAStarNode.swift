@@ -14,7 +14,7 @@ public class JDAStarNode: NSObject {
     public var f: Int = 0
     
     /// The actual cost of transversal from the starting node to the current node
-    /// straight line = 10，diagonal = 45° = sqrt(10^2+10^2) ≈ 14
+    /// straight line = 10，diagonal = 45° = sqrt(10^2+10^2) ≈ 14 （20 can solve some mistake move)
     public var g: Int = 0
     
     /// The estimate cost of transversal from the current node to the target node
