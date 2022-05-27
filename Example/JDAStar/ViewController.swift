@@ -15,10 +15,11 @@ class ViewController: UIViewController {
     let rows = 20
     let startIndex = 0
     var targetIndex = 127
-    let isShowIndex = false
+    let isShowIndex = true
     var pathIndexes = [Int]()
+    var buttonCells = [UIButton]()
     var starTrek: JDAStarTrek?
-    var gridCollectionView: UICollectionView!
+    var boardView: UIView!
     var tapModeSegmentControl: UISegmentedControl!
     var pathModeSegmentControl: UISegmentedControl!
     var blockedIndexes = [97, 112, 126, 141, 155, 170, 184, 199, 128, 143, 159, 174, 190, 205]
@@ -26,33 +27,44 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        setupCollectionView()
+        setBoardView()
         setupSegmentControl()
         
         starTrek = JDAStarTrek(cols: cols, rows: rows)
         findPathTo(targetIndex)
     }
     
-    private func setupCollectionView() {
-        let w = UIScreen.main.bounds.width - 16
-        let layout = UICollectionViewFlowLayout()
-        let cellSize = (w-16) / CGFloat(cols)
-        layout.itemSize = CGSize(width: cellSize, height: cellSize)
-        layout.minimumLineSpacing = 1
-        layout.minimumInteritemSpacing = 0
-        let h = cellSize * CGFloat(rows) + CGFloat(rows)
+    private func setBoardView() {
+        let cellSize = (self.view.frame.width - 20) / CGFloat(cols)
+        let bw = cellSize * CGFloat(cols)
+        let bh = cellSize * CGFloat(rows)
         
-        gridCollectionView = UICollectionView(frame: CGRect(x: 8, y: 0, width: w, height: h), collectionViewLayout: layout)
-        gridCollectionView.center.y = self.view.center.y + 30
-        gridCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        gridCollectionView.delegate = self
-        gridCollectionView.dataSource = self
-        self.view.addSubview(gridCollectionView)
+        boardView = UIView(frame: CGRect(x: 0, y: 300, width: bw, height: bh))
+        boardView.center.x = self.view.center.x
+        boardView.center.y = self.view.center.y + 30
+        self.view.addSubview(boardView)
+        
+        var t = 0
+        for i in 0..<rows {
+            for j in 0..<cols {
+                let b = UIButton(frame: CGRect(x: CGFloat(j) * cellSize, y: CGFloat(i) * cellSize, width: cellSize, height: cellSize))
+                b.tag = t
+                b.addTarget(self, action: #selector(didSelectCell(_:)), for: .touchUpInside)
+                b.titleLabel?.font = UIFont.systemFont(ofSize: 9)
+                b.titleLabel?.adjustsFontSizeToFitWidth = true
+                b.setTitleColor(.darkGray, for: .normal)
+                b.layer.borderColor = UIColor.lightGray.cgColor
+                b.layer.borderWidth = 0.5
+                boardView.addSubview(b)
+                buttonCells.append(b)
+                t += 1
+            }
+        }
     }
     
     private func setupSegmentControl() {
         tapModeSegmentControl = UISegmentedControl(items: ["Target", "Block"])
-        tapModeSegmentControl.frame = CGRect(x: self.view.center.x - 170, y: gridCollectionView.frame.origin.y - 70, width: 150, height: 36)
+        tapModeSegmentControl.frame = CGRect(x: self.view.center.x - 170, y: boardView.frame.origin.y - 70, width: 150, height: 36)
         tapModeSegmentControl.selectedSegmentIndex = 0
         self.view.addSubview(tapModeSegmentControl)
         
@@ -61,16 +73,21 @@ class ViewController: UIViewController {
         pathModeSegmentControl.selectedSegmentIndex = 0
         pathModeSegmentControl.addTarget(self, action: #selector(pathModeSegmentControlChanged(_:)), for: .valueChanged)
         self.view.addSubview(pathModeSegmentControl)
-    }   
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 }
 
 extension ViewController {
-    private func didSelectCell(_ idx: Int) {
+    @objc
+    private func didSelectCell(_ sender: UIButton) {
         if tapModeSegmentControl.selectedSegmentIndex == 1 {
-            setBlock(idx)
+            setBlock(sender.tag)
         }
-        else if idx != startIndex && blockedIndexes.firstIndex(of: idx) == nil {
-            targetIndex = idx
+        else if sender.tag != startIndex && blockedIndexes.firstIndex(of: sender.tag) == nil {
+            targetIndex = sender.tag
         }
         findPathTo(targetIndex)
     }
@@ -97,54 +114,32 @@ extension ViewController {
                                     blockedIndexes: blockedIndexes) {
             pathIndexes = pn.map{ $0.idx }
         }
-        gridCollectionView.reloadData()
-    }
-}
-
-extension ViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cols * rows
-    }
-
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        
-        if indexPath.row == startIndex {
-            cell.backgroundColor = #colorLiteral(red: 0.2174892128, green: 0.8184008598, blue: 0, alpha: 1)
-        }
-        else if indexPath.row == targetIndex {
-            cell.backgroundColor = #colorLiteral(red: 1, green: 0.2156862745, blue: 0.3725490196, alpha: 1)
-        }
-        else if blockedIndexes.contains(indexPath.row) {
-            cell.backgroundColor = #colorLiteral(red: 0.3179988265, green: 0.3179988265, blue: 0.3179988265, alpha: 1)
-        }
-        else if pathIndexes.contains(indexPath.row) {
-            cell.backgroundColor = #colorLiteral(red: 0.4620369673, green: 0.8382686973, blue: 1, alpha: 1)
-        }
-        else {
-            cell.backgroundColor = #colorLiteral(red: 0.8675442338, green: 0.8675442338, blue: 0.8675442338, alpha: 1)
-        }
-        
-        if isShowIndex {
-            for sv in cell.contentView.subviews {
-                sv.removeFromSuperview()
-            }
-            let numLabel = UILabel(frame: CGRect(x: 0, y: 0, width: cell.frame.width, height: cell.frame.height))
-            numLabel.textAlignment = .center
-            numLabel.adjustsFontSizeToFitWidth = true
-            numLabel.text = String(indexPath.row)
-            numLabel.font = UIFont.systemFont(ofSize: 10)
-            numLabel.textColor = .darkGray
-            cell.contentView.addSubview(numLabel)
-        }
-        
-        return cell
+        updateButtons()
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectCell(indexPath.row)
+    func updateButtons() {
+        for b in buttonCells {
+            if b.tag == startIndex {
+                b.backgroundColor = #colorLiteral(red: 0.2174892128, green: 0.8184008598, blue: 0, alpha: 1)
+            }
+            else if b.tag == targetIndex {
+                b.backgroundColor = #colorLiteral(red: 1, green: 0.2156862745, blue: 0.3725490196, alpha: 1)
+            }
+            else if blockedIndexes.contains(b.tag) {
+                b.backgroundColor = #colorLiteral(red: 0.3179988265, green: 0.3179988265, blue: 0.3179988265, alpha: 1)
+            }
+            else if pathIndexes.contains(b.tag) {
+                b.backgroundColor = #colorLiteral(red: 0.4620369673, green: 0.8382686973, blue: 1, alpha: 1)
+            }
+            else {
+                b.backgroundColor = #colorLiteral(red: 0.9333333333, green: 0.9333333333, blue: 0.9333333333, alpha: 1)
+            }
+            
+            if isShowIndex {
+                b.setTitle(String(b.tag), for: .normal)
+            } else {
+                b.setTitle("", for: .normal)
+            }
+        }
     }
 }
-
-
-
