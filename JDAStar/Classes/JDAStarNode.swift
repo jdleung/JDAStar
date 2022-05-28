@@ -26,5 +26,7 @@ public class JDAStarNode: NSObject {
     public var row = 0
     public var col = 0
     public var isBlocked = false
+    public var isOpened = false
+    public var isClosed = false
 }
 

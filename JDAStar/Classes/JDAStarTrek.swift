@@ -81,7 +81,6 @@ public class JDAStarTrek: NSObject {
         let (endCol, endRow) = getPositionByIndex(endIndex)
         let mapNodes = createNodes(blockedIndexes)
         let startNode = mapNodes[startIndex]
-        var closeNodes: [JDAStarNode] = []
         var openNodes: [JDAStarNode] = [startNode]
         
         while openNodes.count > 0 {
@@ -96,7 +95,7 @@ public class JDAStarTrek: NSObject {
                 let subIndex = getIndexByPosition(col: nb.col, row: nb.row)
                 let subNode = mapNodes[subIndex]
                 
-                if subNode.isBlocked || closeNodes.contains(subNode) { continue }
+                if subNode.isBlocked || subNode.isClosed { continue }
 
                 if subNode != startNode {
                     let cost = calculateCosts(currNode: currNode,
@@ -108,13 +107,14 @@ public class JDAStarTrek: NSObject {
                     subNode.f = cost.f
                 }
                 
-                if !openNodes.contains(subNode) {
+                if !subNode.isOpened {
                     subNode.parent = currNode
+                    subNode.isOpened = true
                     openNodes.append(subNode)
                 }
             }
             openNodes.removeFirst()
-            closeNodes.append(currNode)
+            currNode.isClosed = true
         }
 
         var node = mapNodes[endIndex]
