@@ -98,10 +98,11 @@ public class JDAStarTrek: NSObject {
                 if subNode.isBlocked || subNode.isClosed { continue }
 
                 if subNode != startNode {
-                    let cost = calculateCosts(currNode: currNode,
-                                               subNode: subNode,
-                                               endCol: endCol,
-                                               endRow: endRow)
+                    let cost = calculateCosts(startNode: startNode,
+                                              currNode: currNode,
+                                              subNode: subNode,
+                                              endCol: endCol,
+                                              endRow: endRow)
                     subNode.g = cost.g
                     subNode.h = cost.h
                     subNode.f = cost.f
@@ -196,7 +197,7 @@ public class JDAStarTrek: NSObject {
         return positions
     }
     
-    private func calculateCosts(currNode: JDAStarNode, subNode: JDAStarNode, endCol: Int, endRow: Int) -> (g: Double, h: Double, f: Double) {
+    private func calculateCosts(startNode: JDAStarNode, currNode: JDAStarNode, subNode: JDAStarNode, endCol: Int, endRow: Int) -> (g: Double, h: Double, f: Double) {
         let dx = Double(abs(subNode.col - endCol))
         let dy = Double(abs(subNode.row - endRow))
         let dv = 10.0
@@ -216,6 +217,15 @@ public class JDAStarTrek: NSObject {
             /// Manhattan Distance
             /// When we are allowed to move only in four directions only (left, right, up, down)
             h = (dx + dy) * dv
+            
+            /// Breaking ties
+            /// It's a useful way to reduce the time elapsed in large map (more than 2x faster)
+            /// but the paths always don't like going straight (althought both have the same number of moves)
+            /// http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html#breaking-ties
+            /// let dx2 = Double(abs(startNode.col - endCol))
+            /// let dy2 = Double(abs(startNode.row - endRow))
+            /// let cross = abs(dx*dy2 - dx2*dy)
+            /// h += cross*0.001
         }
         
         let f = g + h
