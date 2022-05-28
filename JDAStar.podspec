@@ -8,8 +8,8 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JDAStar'
-  s.version          = '0.1.0'
-  s.summary          = 'A simple path finding library based on the A* algorithm.'
+  s.version          = '0.2.0'
+  s.summary          = 'A simple path finding library based on the A*(Astar) algorithm.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-  A simple path finding iOS library based on the A* algorithm.
+  A simple path finding iOS library based on the A*(Astar) algorithm.
                        DESC
 
   s.homepage         = 'https://github.com/jdleung/JDAStar'
@@ -28,6 +28,7 @@ Pod::Spec.new do |s|
   s.source           = { :git => 'https://github.com/jdleung/JDAStar.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
+  s.platform = :ios
   s.ios.deployment_target = '9.0'
   s.swift_version = "4.0"
 
