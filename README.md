@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/JDAStar.svg?style=flat)](https://cocoapods.org/pods/JDAStar)
 [![Platform](https://img.shields.io/cocoapods/p/JDAStar.svg?style=flat)](https://cocoapods.org/pods/JDAStar)
 
-A simple path finding library based on the A* algorithm.
+A simple path finding library based on the A*(Astar) algorithm.
 
 <img src="screenshot.gif" />
 
