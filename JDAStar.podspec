@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-  A simple path finding iOS library based on the A*(Astar) algorithm.
+  A simple path finding library based on the A*(Astar) algorithm, supports for iOS & macOS.
                        DESC
 
   s.homepage         = 'https://github.com/jdleung/JDAStar'
