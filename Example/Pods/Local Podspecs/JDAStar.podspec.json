@@ -1,8 +1,8 @@
 {
   "name": "JDAStar",
-  "version": "0.1.0",
-  "summary": "A short description of JDAStar.",
-  "description": "TODO: Add long description of the pod here.",
+  "version": "0.2.0",
+  "summary": "A simple path finding library based on the A*(Astar) algorithm.",
+  "description": "A simple path finding iOS library based on the A*(Astar) algorithm.",
   "homepage": "https://github.com/jdleung/JDAStar",
   "license": {
     "type": "MIT",
@@ -13,10 +13,13 @@
   },
   "source": {
     "git": "https://github.com/jdleung/JDAStar.git",
-    "tag": "0.1.0"
+    "tag": "0.2.0"
   },
   "platforms": {
-    "ios": "9.0"
+    "ios": "9.0",
+    "osx": "11.0"
   },
-  "source_files": "JDAStar/Classes/**/*"
+  "swift_versions": "4.0",
+  "source_files": "JDAStar/Classes/**/*",
+  "swift_version": "4.0"
 }

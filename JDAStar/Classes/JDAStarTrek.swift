@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import UIKit
 
 public struct AStarPosition {
     var col: Int
