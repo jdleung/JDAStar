@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JDAStar'
-  s.version          = '0.3.0'
+  s.version          = '0.3.1'
   s.summary          = 'A simple iOS & macOS path finding library based on the A*(Astar) algorithm.'
 
 # This description is used to generate tags and improve search results.
