@@ -1,5 +1,5 @@
 PODS:
-  - JDAStar (0.2.0)
+  - JDAStar (0.3.0)
 
 DEPENDENCIES:
   - JDAStar (from `../`)
@@ -9,7 +9,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  JDAStar: 8e6a9dd01033955049eadb4715fdcf1d5e7bc31b
+  JDAStar: 6700f8a91078063061cbc4ecae981cda377ef586
 
 PODFILE CHECKSUM: a5b464a39646aef0aa1956c4d4bc77763f804b5b
 
