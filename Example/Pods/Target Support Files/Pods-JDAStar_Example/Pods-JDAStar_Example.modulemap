@@ -1,6 +1,0 @@
-framework module Pods_JDAStar_Example {
-  umbrella header "Pods-JDAStar_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}
