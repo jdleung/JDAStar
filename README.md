@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/cocoapods/l/JDAStar.svg?style=flat)](https://cocoapods.org/pods/JDAStar)
 [![Platform](https://img.shields.io/cocoapods/p/JDAStar.svg?style=flat)](https://cocoapods.org/pods/JDAStar)
 
-A simple path finding library based on the A*(Astar) algorithm.
+A simple path finding library based on the A*(A-Star) algorithm.
 
 <img src="screenshot.gif" />
 
@@ -14,7 +14,9 @@ To run the example project, clone the repo, and run `pod install` from the Examp
 
 ## Requirements
 
-iOS 9.0+, macOS 11.0+, Swift 4.0
+- iOS 9.0+
+- macOS 11.0+
+- Swift 4.0+
 
 ## Installation
 
